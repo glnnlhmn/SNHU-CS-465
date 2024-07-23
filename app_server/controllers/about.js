@@ -1,9 +1,9 @@
 /* GET about view */
 const about = (req, res) => {
-
-    res.render('about', { title: 'Travlr Gateways'});
+    pageTitle = process.env.npm_package_description + " - About";
+    res.render('about', { title: pageTitle});
 };
 
 module.exports = {
-    about
+    about,
 };

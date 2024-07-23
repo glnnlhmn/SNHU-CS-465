@@ -1,9 +1,9 @@
 /* GET news view */
 const news = (req, res) => {
-
-    res.render('news', { title: 'Travlr Gateways'});
+    pageTitle = process.env.npm_package_description + " - News";
+    res.render('news', { title: pageTitle});
 };
 
 module.exports = {
-    news
+    news,
 };

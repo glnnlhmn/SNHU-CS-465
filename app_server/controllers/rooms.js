@@ -1,9 +1,9 @@
 /* GET rooms view */
 const rooms = (req, res) => {
-
-    res.render('rooms', { title: 'Travlr Gateways'});
+    pageTitle = process.env.npm_package_description + " - Rooms";
+    res.render('rooms', { title: pageTitle});
 };
 
 module.exports = {
-    rooms
+    rooms,
 };
