@@ -4,6 +4,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const hbs = require('hbs');
+require('./app_api/models/db'); // Bring in the database
 
 var indexRouter = require('./app_server/routes/index');
 var usersRouter = require('./app_server/routes/users');
@@ -13,10 +14,8 @@ var newsRouter = require('./app_server/routes/news');
 var mealsRouter = require('./app_server/routes/meals');
 var contactRouter = require('./app_server/routes/contact');
 var aboutRouter = require('./app_server/routes/about');
-var apiRouter = require('./app_api/routes/index');
 
-// Bring in the database
-require('./app_api/models/db');
+var apiRouter = require('./app_api/routes/index');
 
 var app = express();
 
@@ -31,6 +30,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Enable CORS
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'http://localhost:4200');
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+  next();
+});
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
